@@ -1,0 +1,4 @@
+node_modules/
+settings-development.json
+.DS_Store
+npm-debug.log
