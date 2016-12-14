@@ -1,6 +1,6 @@
 import './api.js';
-// import FacebookOAuthInit from './oauth-facebook';
+import TwilioOAuthInit from './oauth-twilio';
 
 Meteor.startup(() => {
-  // FacebookOAuthInit();
+  TwilioOAuthInit();
 });
