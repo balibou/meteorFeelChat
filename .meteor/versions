@@ -3,6 +3,7 @@ allow-deny@1.0.5
 autoupdate@1.2.11
 babel-compiler@6.13.0
 babel-runtime@1.0.1
+balibou:accounts-phone@0.0.21
 base64@1.0.10
 binary-heap@1.0.10
 blaze@2.1.9
@@ -48,7 +49,6 @@ modules@0.7.7
 modules-runtime@0.7.7
 mongo@1.1.14
 mongo-id@1.0.6
-mys:accounts-phone@0.0.21
 npm-bcrypt@0.9.2
 npm-mongo@2.2.11_2
 observe-sequence@1.0.14
