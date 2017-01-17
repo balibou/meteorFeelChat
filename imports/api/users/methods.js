@@ -33,3 +33,25 @@ export const insertNames = new ValidatedMethod({
     });
   },
 });
+
+export const insertContacts = new ValidatedMethod({
+  name: 'contacts.insert',
+  validate(){},
+  run({ contacts }) {
+    const { userId } = this;
+    return Meteor.users.update({ _id: userId }, {
+      $set: { contacts: contacts },
+    });
+  },
+});
+
+export const updateContacts = new ValidatedMethod({
+  name: 'contacts.update',
+  validate(){},
+  run({ contacts }) {
+    const { userId } = this;
+    return Meteor.users.update({ _id: userId }, {
+      $set: { contacts: contacts },
+    });
+  },
+});
