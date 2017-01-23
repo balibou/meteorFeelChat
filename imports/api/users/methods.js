@@ -34,24 +34,31 @@ export const insertNames = new ValidatedMethod({
   },
 });
 
-export const insertContacts = new ValidatedMethod({
-  name: 'contacts.insert',
-  validate(){},
-  run({ contacts }) {
-    const { userId } = this;
-    return Meteor.users.update({ _id: userId }, {
-      $set: { contacts: contacts },
-    });
-  },
-});
-
 export const updateContacts = new ValidatedMethod({
   name: 'contacts.update',
   validate(){},
   run({ contacts }) {
     const { userId } = this;
-    return Meteor.users.update({ _id: userId }, {
-      $set: { contacts: contacts },
+    const newUpdatedContactsList = contacts.map((contact) => {
+      if (contact.phoneNumbers.length) {
+        contact.phoneNumbers.map((phoneNumberItem) => {
+          const phoneNumberExists = Meteor.users.findOne({'phone.number': phoneNumberItem.digits});
+          if (phoneNumberExists) {
+            phoneNumberItem.isFeelChatUser = true;
+          } else {
+            phoneNumberItem.isFeelChatUser = false;
+          }
+          return phoneNumberItem;
+        })
+        return contact;
+      } else {
+        return contact;
+      }
+    })
+    const newUpdatedContactsListFiltered = newUpdatedContactsList.filter((newUpdatedContactsListItem) => newUpdatedContactsListItem);
+    Meteor.users.update({ _id: userId }, {
+      $set: { contacts: newUpdatedContactsListFiltered },
     });
+    return newUpdatedContactsListFiltered;
   },
 });
