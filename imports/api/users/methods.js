@@ -41,14 +41,16 @@ export const updateContacts = new ValidatedMethod({
     const { userId } = this;
     const newUpdatedContactsList = contacts.map((contact) => {
       if (contact.phoneNumbers.length) {
+        contact.isFeelChatUser = false;
         contact.phoneNumbers.map((phoneNumberItem) => {
           const phoneNumberExists = Meteor.users.findOne({'phone.number': phoneNumberItem.digits});
           if (phoneNumberExists) {
             phoneNumberItem.isFeelChatUser = true;
+            contact.isFeelChatUser = true;
           } else {
             phoneNumberItem.isFeelChatUser = false;
           }
-          return phoneNumberItem;
+          return phoneNumberItem && contact;
         })
         return contact;
       } else {
