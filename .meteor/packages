@@ -21,5 +21,5 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 accounts-base
 npm-bcrypt
 balibou:accounts-phone
-aldeed:simple-schema
 mdg:validated-method
+aldeed:collection2
